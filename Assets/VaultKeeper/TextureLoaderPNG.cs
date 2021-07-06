@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Camara {
+namespace VaultKeeper {
     public class TextureLoaderPNG : ITextureLoader {
         public Texture2D LoadTexture(byte[] bytes) {
             Texture2D texture2D = new Texture2D(1, 1);

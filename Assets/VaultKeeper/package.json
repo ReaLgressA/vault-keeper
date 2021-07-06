@@ -2,7 +2,7 @@
   "name": "com.realgressa.vaultkeerper",
   "displayName": "Vault Keeper",
   "author": { "name": "Vladyslav Luhovskoi", "url": "https://github.com/ReaLgressA" },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "unity": "2020.3",
   "description": "Asset bundling solution for Unity engine.",
   "keywords": [ "Assets", "Bundles", "Modding" ],

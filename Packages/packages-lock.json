@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.realgressa.camara": {
-      "version": "https://github.com/ReaLgressA/camara.git?path=Assets/Scripts/Camara#0.0.2",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "80115d04984c9b9dcfee80ec7b923691f52fab8a"
-    },
     "com.unity.2d.animation": {
       "version": "5.0.5",
       "depth": 1,

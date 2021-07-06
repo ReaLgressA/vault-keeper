@@ -9,7 +9,6 @@
     }
   ],
   "dependencies": {
-    "com.realgressa.camara": "https://github.com/ReaLgressA/camara.git?path=Assets/Scripts/Camara#0.0.2",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.0.2",
     "com.unity.2d.sprite": "1.0.0",
