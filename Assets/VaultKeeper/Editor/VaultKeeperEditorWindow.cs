@@ -175,7 +175,7 @@ namespace VaultKeeper.Editor {
             string defaultName = string.IsNullOrWhiteSpace(openFile) ? "vault" :  Path.GetFileNameWithoutExtension(openFile);
             string importFilePath = EditorUtility.OpenFilePanel("Import Vault File", openFile, VaultConstants.ZIP_EXTENSION);
             Debug.Log($"Import file path: {importFilePath}");
-            VaultScriptableObjectWrapper vault = await Vault.ImportVault(importFilePath);
+            VaultScriptableObjectWrapper vault = await Vault.ImportWrappedVault(importFilePath);
             SetVaultWrapper(vault);
         }
 

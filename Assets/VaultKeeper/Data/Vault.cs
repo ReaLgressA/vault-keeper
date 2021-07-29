@@ -36,7 +36,7 @@ namespace VaultKeeper.Data {
             File.WriteAllText(filePath, json);
         }
 
-        public static async Task<VaultScriptableObjectWrapper> ImportVault(string importFilePath) {
+        public static async Task<VaultScriptableObjectWrapper> ImportWrappedVault(string importFilePath) {
             VaultScriptableObjectWrapper vaultWrapper = (VaultScriptableObjectWrapper)
                 ScriptableObject.CreateInstance(typeof(VaultScriptableObjectWrapper));
             
@@ -49,6 +49,14 @@ namespace VaultKeeper.Data {
             await vaultWrapper.vault.PrepareAfterImport(zipFile);
             
             return vaultWrapper;
+        }
+        
+        public static async Task<Vault> ImportVault(string importFilePath) {
+            ZipFile zipFile = new ZipFile(File.OpenRead(importFilePath), false);
+            string json = await zipFile.LoadText("vault.json");
+            Vault vault = JsonUtility.FromJson<Vault>(json);
+            await vault.PrepareAfterImport(zipFile);
+            return vault;
         }
 
         public void ExportVault(string exportFilePath) {
