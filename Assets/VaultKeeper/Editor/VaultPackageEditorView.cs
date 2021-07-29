@@ -10,6 +10,7 @@ namespace VaultKeeper.Editor {
         public void DrawOnGUI(VaultPackage package, Rect windowRect) {
             GUILayout.BeginVertical();
             package.Name = EditorGUILayout.TextField("Name", package.Name);
+            package.Label = EditorGUILayout.TextField("Label", package.Label);
             spriteListEditorView.DrawOnGUI(package.ContentSprites, windowRect);
             GUILayout.EndVertical();
         }

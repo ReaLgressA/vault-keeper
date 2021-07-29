@@ -12,9 +12,12 @@ namespace VaultKeeper.Data {
         [HideInInspector, SerializeField] 
         private string name;
         [HideInInspector, SerializeField] 
+        private string label;
+        [HideInInspector, SerializeField] 
         private VaultPackageContentSprites contentSprites = new VaultPackageContentSprites();
         
         public string Name { get => name; set => name = value; }
+        public string Label { get => label; set => label = value; }
 
         public VaultPackageContentSprites ContentSprites => contentSprites;
 
