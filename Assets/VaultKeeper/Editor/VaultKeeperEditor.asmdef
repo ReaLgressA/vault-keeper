@@ -1,10 +1,12 @@
 {
-    "name": "VaultKeeper",
-    "rootNamespace": "VaultKeeper",
+    "name": "VaultKeeperEditor",
+    "rootNamespace": "",
     "references": [
-        "GUID:64ef0a6e60bfe41668183479d452bf9b"
+        "GUID:a40249e55f171451e9b0663cbaf032e3"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
