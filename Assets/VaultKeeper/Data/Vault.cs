@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
 using UnityEngine;
+using VaultKeeper.Data.PackageContent;
 using VaultKeeper.Utility;
 
 namespace VaultKeeper.Data {
@@ -80,6 +81,22 @@ namespace VaultKeeper.Data {
                 zipStream.CreateFileEntry("vault.json", json);
                 zipStream.Close();
             }
+        }
+
+        public void GetSprites(string packageLabel, List<VaultPackageContentSprites.SpriteSettings> sprites) {
+            for (int i = 0; i < Packages.Count; ++i) {
+                Packages[i].GetPackageSprites(packageLabel, sprites);
+            }
+        }
+        
+        public VaultPackageContentSprites.SpriteSettings GetSprite(string id) {
+            for (int i = 0; i < Packages.Count; ++i) {
+                var sprite = Packages[i].GetSprite(id);
+                if (sprite != null) {
+                    return sprite;
+                }
+            }
+            return null;
         }
         
         private async Task PrepareAfterImport(ZipFile zipFile) {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
@@ -50,6 +51,24 @@ namespace VaultKeeper.Data {
         public async Task PrepareAfterImport(ZipFile zipFile, string directoryRoot) {
             string directoryPackage = $"{directoryRoot}{Name}/";
             await contentSprites.PrepareAfterImport(zipFile, directoryPackage);
+        }
+
+        public void GetPackageSprites(string packageLabel, List<VaultPackageContentSprites.SpriteSettings> sprites) {
+            if (!string.IsNullOrWhiteSpace(packageLabel) 
+                && !Label.Equals(packageLabel, StringComparison.Ordinal)) {
+                return;
+            }
+            for (int i = 0; i < ContentSprites.Sprites.Count; ++i) {
+                sprites.Add(ContentSprites.Sprites[i]);
+            }
+        }
+        public VaultPackageContentSprites.SpriteSettings GetSprite(string id) {
+            for (int i = 0; i < ContentSprites.Sprites.Count; ++i) {
+                if (string.Equals(ContentSprites.Sprites[i].id, id, StringComparison.Ordinal)) {
+                    return ContentSprites.Sprites[i];
+                }
+            }
+            return null;
         }
     }
 }
