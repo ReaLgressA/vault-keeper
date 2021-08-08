@@ -40,7 +40,9 @@ namespace VaultKeeper.Data.PackageContent {
             public SpriteSettings(Sprite sprite) {
                 this.sprite = sprite;
                 id = sprite.name.ToLower();
+#if UNITY_EDITOR
                 PrepareForSave();
+#endif
             }
 
             
