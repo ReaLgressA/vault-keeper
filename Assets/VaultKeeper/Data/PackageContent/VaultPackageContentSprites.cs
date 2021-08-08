@@ -92,15 +92,19 @@ namespace VaultKeeper.Data.PackageContent {
         }
 
         public void PrepareForSave() {
+#if UNITY_EDITOR
             for (int i = 0; i < sprites.Count; ++i) {
                 sprites[i].PrepareForSave();
             }
+#endif
         }
         
         public void PrepareAfterLoading() {
+#if UNITY_EDITOR
             for (int i = 0; i < sprites.Count; ++i) {
                 sprites[i].PrepareAfterLoading();
             }
+#endif
         }
         
         public async Task PrepareAfterImport(ZipFile zipFile, string directoryPackage) {
