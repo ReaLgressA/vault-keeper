@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
-using UnityEditor;
 using UnityEngine;
 using VaultKeeper.Utility;
 using Object = UnityEngine.Object;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace VaultKeeper.Data.PackageContent {
     [Serializable]
@@ -40,6 +43,8 @@ namespace VaultKeeper.Data.PackageContent {
                 PrepareForSave();
             }
 
+            
+#if UNITY_EDITOR
             public void PrepareAfterLoading() {
                 Object[] assets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
                 for (int i = 0; i < assets.Length; ++i) {
@@ -69,6 +74,7 @@ namespace VaultKeeper.Data.PackageContent {
                 spriteExtrude = settings.spriteExtrude;
                 generateFallbackPhysicsShape = settings.spriteGenerateFallbackPhysicsShape;
             }
+#endif
 
             public void Export(ZipOutputStream stream, string directorySprites) {
                 string path = $"{directorySprites}{id}.png";
