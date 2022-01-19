@@ -15,7 +15,8 @@ namespace VaultKeeper.Data.PackageContent {
     public class VaultPackageContentSprites : VaultPackageContent {
         public override VaultPackageContentType ContentType => VaultPackageContentType.Sprites;
 
-        [SerializeField] private List<SpriteSettings> sprites = new List<SpriteSettings>();
+        [SerializeField] 
+        private List<SpriteSettings> sprites = new List<SpriteSettings>();
 
         public List<SpriteSettings> Sprites => sprites;
 

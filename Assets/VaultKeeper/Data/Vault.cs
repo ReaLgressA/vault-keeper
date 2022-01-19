@@ -89,9 +89,25 @@ namespace VaultKeeper.Data {
             }
         }
         
+        public void GetTextAssets(string packageLabel, List<VaultPackageContentTexts.TextAssetSettings> textAssets) {
+            for (int i = 0; i < Packages.Count; ++i) {
+                Packages[i].GetPackageTextAssets(packageLabel, textAssets);
+            }
+        }
+        
         public VaultPackageContentSprites.SpriteSettings GetSprite(string id) {
             for (int i = 0; i < Packages.Count; ++i) {
                 var sprite = Packages[i].GetSprite(id);
+                if (sprite != null) {
+                    return sprite;
+                }
+            }
+            return null;
+        }
+        
+        public VaultPackageContentTexts.TextAssetSettings GetTextAsset(string id) {
+            for (int i = 0; i < Packages.Count; ++i) {
+                var sprite = Packages[i].GetTextAsset(id);
                 if (sprite != null) {
                     return sprite;
                 }

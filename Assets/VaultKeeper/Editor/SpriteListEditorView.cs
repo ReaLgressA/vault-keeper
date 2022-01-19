@@ -16,9 +16,8 @@ namespace VaultKeeper.Editor {
         }
         
         public void DrawOnGUI(VaultPackageContentSprites content, Rect windowRect) {
-            
             EditorGUILayout.LabelField(string.Empty, GUI.skin.horizontalSlider);
-            GUILayout.Label("Content List: Sprites", styleLabelCentered);
+            GUILayout.Label("SPRITES & TEXTURES", styleLabelCentered);
             InitializeStyles();
             if (Event.current.type == EventType.DragUpdated)
             {
@@ -26,7 +25,7 @@ namespace VaultKeeper.Editor {
                 Event.current.Use();
             }
             if (Event.current.type == EventType.DragPerform) {
-                DragAndDrop.AcceptDrag();
+                
                 for (int i = 0; i < DragAndDrop.objectReferences.Length; i++) {
                     Object obj = DragAndDrop.objectReferences[i];
                     Debug.Log(obj.GetType().Name);
@@ -42,7 +41,8 @@ namespace VaultKeeper.Editor {
                         }
                     }
                 }
-                Event.current.Use();
+                // DragAndDrop.AcceptDrag();
+                // Event.current.Use();
             }
             
             GUIContent[] spriteEntries = new GUIContent[content.Sprites.Count];
@@ -62,23 +62,26 @@ namespace VaultKeeper.Editor {
             GUILayout.Space(20);
             if (HasSelectedSprite(content)) {
                 VaultPackageContentSprites.SpriteSettings selectedSprite = content.Sprites[selectedEntryIndex];
-                
-                Texture2D selectedPreview = AssetPreview.GetAssetPreview(selectedSprite.sprite);
-                GUILayout.BeginVertical(GUILayout.Width(windowRect.width / 4));
-                GUILayout.Box(selectedPreview, GUILayout.Width(windowRect.width / 4));
-                selectedSprite.id = GUILayout.TextField(selectedSprite.id, GUILayout.Width(windowRect.width / 4));
-                GUILayout.Label($"{selectedSprite.sprite.rect.width} x {selectedSprite.sprite.rect.height}", styleLabelCentered,
-                                GUILayout.Width(windowRect.width / 4));
-                
-                GUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
-                if (HasSelectedSprite(content) && GUILayout.Button("Remove")) {
-                    content.Sprites.RemoveAt(selectedEntryIndex);
+                if (selectedSprite != null) {
+                    Texture2D selectedPreview = AssetPreview.GetAssetPreview(selectedSprite.sprite);
+                    GUILayout.BeginVertical(GUILayout.Width(windowRect.width / 4));
+                    GUILayout.Box(selectedPreview, GUILayout.Width(windowRect.width / 4));
+                    selectedSprite.id = GUILayout.TextField(selectedSprite.id, GUILayout.Width(windowRect.width / 4));
+                    GUILayout.Label($"{selectedSprite.sprite.rect.width} x {selectedSprite.sprite.rect.height}",
+                                    styleLabelCentered,
+                                    GUILayout.Width(windowRect.width / 4));
+
+                    GUILayout.BeginHorizontal();
+                    GUILayout.FlexibleSpace();
+                    if (HasSelectedSprite(content) && GUILayout.Button("Remove")) {
+                        content.Sprites.RemoveAt(selectedEntryIndex);
+                    }
+
+                    GUILayout.Space(25);
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.EndVertical();
                 }
-                GUILayout.Space(25);
-                GUILayout.EndHorizontal();
-                
-                GUILayout.EndVertical();
             } else {
                 GUILayout.FlexibleSpace();
             }

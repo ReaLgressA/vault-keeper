@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace VaultKeeper {
     public static class TextureSerializer {
-        
         public static Texture2D LoadTexture(byte[] bytes, TextureFormat textureFormat, bool isSRGB) {
             Texture2D texture2D = new Texture2D(1, 1, textureFormat, false, !isSRGB);
             texture2D.LoadImage(bytes, false);
