@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AssetPacker.ComponentPackers {
     [Serializable]
-    public class PackedRectTransform {
+    public class PackedRectTransform : IComponentUnpacker {
         [JsonProperty] 
         private float apx, apy, apz;
         [JsonProperty] 

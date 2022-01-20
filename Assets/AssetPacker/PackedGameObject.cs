@@ -14,6 +14,8 @@ namespace AssetPacker {
         [JsonProperty]
         private PackedRectTransform rectTransform = null;
         [JsonProperty]
+        private PackedCanvas canvas = null;
+        [JsonProperty]
         private PackedGameObject[] children;
         [JsonProperty]
         private PackedMonoBehavior[] components;
@@ -26,6 +28,9 @@ namespace AssetPacker {
                 packed.rectTransform.Unpack(go);
             } else {
                 packed.transform.Unpack(go);
+            }
+            if (packed.canvas != null) {
+                packed.canvas.Unpack(go); 
             }
             foreach (PackedMonoBehavior component in packed.components) {
                 component.Unpack(go);
@@ -42,6 +47,7 @@ namespace AssetPacker {
                 name = gameObject.name,
                 rectTransform = rectTransform == null ? null : new PackedRectTransform(rectTransform),
                 transform = rectTransform == null ? new PackedTransform(gameObject.transform) : null,
+                canvas = PackedCanvas.CanPack(gameObject) ? new PackedCanvas(gameObject.GetComponent<Canvas>()) : null,
                 components = PackComponents(gameObject),
                 children = PackChildren(gameObject)
             };
