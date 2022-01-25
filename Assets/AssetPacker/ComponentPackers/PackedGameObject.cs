@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AssetPacker.ComponentPackers;
 using Newtonsoft.Json;
+using UnityEditor;
 using UnityEngine;
 
 namespace AssetPacker {
@@ -9,6 +10,8 @@ namespace AssetPacker {
     public class PackedGameObject {
         [JsonProperty]
         private string name;
+        [JsonProperty]
+        private int instanceId;
         [JsonProperty]
         private PackedTransform transform = null;
         [JsonProperty]
@@ -23,15 +26,13 @@ namespace AssetPacker {
         public static GameObject Unpack(PackedGameObject packed, Transform trRoot) {
             GameObject go = new GameObject(packed.name);
             go.transform.SetParent(trRoot);
-
             if (packed.rectTransform != null) {
                 packed.rectTransform.Unpack(go);
             } else {
                 packed.transform.Unpack(go);
             }
-            if (packed.canvas != null) {
-                packed.canvas.Unpack(go); 
-            }
+            
+            packed.canvas?.Unpack(go);
             foreach (PackedMonoBehavior component in packed.components) {
                 component.Unpack(go);
             }
@@ -45,6 +46,7 @@ namespace AssetPacker {
             RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
             return new PackedGameObject {
                 name = gameObject.name,
+                instanceId = gameObject.GetInstanceID(),
                 rectTransform = rectTransform == null ? null : new PackedRectTransform(rectTransform),
                 transform = rectTransform == null ? new PackedTransform(gameObject.transform) : null,
                 canvas = PackedCanvas.CanPack(gameObject) ? new PackedCanvas(gameObject.GetComponent<Canvas>()) : null,
@@ -66,7 +68,7 @@ namespace AssetPacker {
             var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
             
             foreach (var c in monoBehaviours) {
-                Debug.Log($"HAS MONOBEHAVIOUR: {c.GetType().Name}");                   
+                components.Add(new PackedMonoBehavior(c));
             }
             return components.ToArray();
         }
